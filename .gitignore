@@ -1,3 +1,11 @@
 venv/
 __pycache__/
 **/__pycache__/
+*.py[cod]
+*$py.class
+.ipynb_checkpoints
+mlruns/
+.env
+env/
+.vscode/
+.idea/
