@@ -1,0 +1,26 @@
+services:
+  mlflow:
+    image: ghcr.io/mlflow/mlflow:v3.1.2
+    container_name: mlflow
+    ports:
+      - "5000:5000"
+    command: >
+      mlflow server
+      --backend-store-uri /mlflow/mlruns
+      --default-artifact-root /mlflow/mlruns
+      --host 0.0.0.0
+    volumes:
+      - ./mlruns:/mlflow/mlruns
+
+  conversion_rate:
+    build:
+      context: .
+    container_name: conversion_rate
+    depends_on:
+      - mlflow
+    environment:
+      - MLFLOW_TRACKING_URI=http://mlflow:5000
+    working_dir: /app
+    command: /bin/sh -c "sleep 10 && python train.py"
+    volumes:
+      - ./data:/app/data
