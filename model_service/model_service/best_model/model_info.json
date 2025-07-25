@@ -1,0 +1,39 @@
+{
+  "model_name": "MLP",
+  "rmse": 1.905271449894552,
+  "mae": 0.9612416719443118,
+  "r2": 0.8811498374437976,
+  "run_id": "3566b4d0dcb6441fbdd36f4ea5fc7b6c",
+  "preprocessing_summary": {
+    "numerical_cols": [
+      "ad_id",
+      "xyz_campaign_id",
+      "fb_campaign_id",
+      "interest",
+      "Impressions",
+      "Clicks",
+      "Spent",
+      "Approved_Conversion"
+    ],
+    "categorical_cols": [
+      "age",
+      "gender"
+    ],
+    "total_features_original": 10,
+    "total_features_processed": 12,
+    "feature_names": [
+      "ad_id",
+      "xyz_campaign_id",
+      "fb_campaign_id",
+      "interest",
+      "Impressions",
+      "Clicks",
+      "Spent",
+      "Approved_Conversion",
+      "age_35-39",
+      "age_40-44",
+      "age_45-49",
+      "gender_M"
+    ]
+  }
+}

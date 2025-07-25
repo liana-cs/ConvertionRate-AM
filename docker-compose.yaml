@@ -1,9 +1,11 @@
+version: '3.8'
+
 services:
   mlflow:
     image: ghcr.io/mlflow/mlflow:v3.1.2
     container_name: mlflow
     ports:
-      - "5000:5000"
+      - "5002:5000"  
     command: >
       mlflow server
       --backend-store-uri /mlflow/mlruns
@@ -11,6 +13,31 @@ services:
       --host 0.0.0.0
     volumes:
       - ./mlruns:/mlflow/mlruns
+
+  model-service:
+    build: ./model_service
+    container_name: model-service
+    ports:
+      - "5001:5001"
+    depends_on:
+      - mlflow
+    environment:
+      - MLFLOW_TRACKING_URI=http://mlflow:5000  
+    volumes:
+      - ./mlruns:/app/mlruns
+      - ./data:/app/data
+
+  web-interface:
+    build: ./interface
+    container_name: web-interface
+    ports:
+      - "5000:5000" 
+    depends_on:
+      - model-service
+    environment:
+      - MODEL_SERVICE_URL=http://model-service:5001
+    volumes:
+      - ./interface/uploads:/app/uploads
 
   conversion_rate:
     build:
@@ -24,3 +51,5 @@ services:
     command: /bin/sh -c "sleep 10 && python train.py"
     volumes:
       - ./data:/app/data
+    profiles:
+      - standalone  

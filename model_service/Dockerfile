@@ -9,5 +9,10 @@ RUN pip install --no-cache-dir -r requirements.txt
 COPY src/ .
 COPY data/ ./data/
 COPY mlruns/ ./mlruns/
+COPY app.py .
 
-CMD ["python", "train.py"]
+RUN mkdir -p mlruns data
+
+EXPOSE 5001
+
+CMD ["python", "app.py"]
