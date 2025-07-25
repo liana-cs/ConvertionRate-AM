@@ -1,8 +1,11 @@
 from flask import Flask, request, jsonify
 import os
 import sys
-sys.path.append(os.path.join(os.path.dirname(__file__), '..', 'src'))
-from train import MLModelTrainer
+import sys
+import os
+sys.path.append(os.path.abspath(os.path.dirname(__file__)))
+sys.path.append(os.path.join(os.path.dirname(__file__), "src"))
+from src.train import MLModelTrainer
 import tempfile
 import shutil
 import logging

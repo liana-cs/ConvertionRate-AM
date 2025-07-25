@@ -6,6 +6,9 @@ import requests
 import time
 from werkzeug.utils import secure_filename
 import logging
+import time
+import requests
+import logging
 
 app = Flask(__name__)
 app.secret_key = 'your-secret-key-here'
@@ -18,7 +21,9 @@ logger = logging.getLogger(__name__)
 os.makedirs(app.config['UPLOAD_FOLDER'], exist_ok=True)
 
 ALLOWED_EXTENSIONS = {'csv'}
-MODEL_SERVICE_URL = os.getenv('MODEL_SERVICE_URL', 'http://127.0.0.1:5001')
+# MODEL_SERVICE_URL = os.getenv('MODEL_SERVICE_URL', 'http://127.0.0.1:5001')
+MODEL_SERVICE_URL = os.getenv('MODEL_SERVICE_URL', 'http://model-service:5001')
+
 
 def allowed_file(filename):
     return '.' in filename and filename.rsplit('.', 1)[1].lower() in ALLOWED_EXTENSIONS
@@ -72,7 +77,7 @@ def train_model(filename):
     try:
         with open(filepath, 'rb') as f:
             files = {'file': (filename, f, 'text/csv')}
-            response = requests.post(f'{MODEL_SERVICE_URL}/train', files=files, timeout=300)
+            response = post_with_retry(f'{MODEL_SERVICE_URL}/train', files)
         
         if response.status_code == 200:
             results = response.json()
@@ -94,6 +99,23 @@ def train_model(filename):
 @app.route('/health')
 def health():
     return jsonify({'status': 'healthy'})
+
+
+logger = logging.getLogger(__name__)
+
+def post_with_retry(url, files, retries=5, delay=3):
+    """
+    Tenta fazer POST na URL até `retries` vezes,
+    esperando `delay` segundos entre as tentativas.
+    """
+    for attempt in range(retries):
+        try:
+            response = requests.post(url, files=files, timeout=600)
+            return response
+        except requests.exceptions.RequestException as e:
+            logger.warning(f"Tentativa {attempt+1} falhou: {e}")
+            time.sleep(delay)
+    raise Exception("Não conseguiu se conectar ao serviço de modelo após várias tentativas")
 
 if __name__ == '__main__':
     app.run(host='0.0.0.0', port=5000, debug=True)

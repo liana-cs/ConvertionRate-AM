@@ -13,19 +13,26 @@ services:
       --host 0.0.0.0
     volumes:
       - ./mlruns:/mlflow/mlruns
+    networks:
+      - app-network
 
   model-service:
-    build: ./model_service
+    build:
+      context: .
+      dockerfile: model_service/Dockerfile
     container_name: model-service
     ports:
       - "5001:5001"
     depends_on:
       - mlflow
     environment:
-      - MLFLOW_TRACKING_URI=http://mlflow:5000  
+      - MLFLOW_TRACKING_URI=http://mlflow:5000
     volumes:
-      - ./mlruns:/app/mlruns
-      - ./data:/app/data
+      - ./model_service:/app
+      - ./DATA:/app/data
+      - ./src:/app/src   
+    networks:
+      - app-network
 
   web-interface:
     build: ./interface
@@ -38,6 +45,9 @@ services:
       - MODEL_SERVICE_URL=http://model-service:5001
     volumes:
       - ./interface/uploads:/app/uploads
+    networks:
+      - app-network
+
 
   conversion_rate:
     build:
@@ -53,3 +63,10 @@ services:
       - ./data:/app/data
     profiles:
       - standalone  
+    networks:
+      - app-network
+
+
+networks:
+  app-network:
+    driver: bridge
