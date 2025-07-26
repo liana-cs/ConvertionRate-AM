@@ -5,10 +5,10 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>ML Model Trainer</title>
     <link
+      href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600;700&display=swap"
       rel="stylesheet"
-      href="{{ url_for('static', filename='styles.css') }}"
     />
-    <link rel="stylesheet" href="style.css" />
+    <link rel="stylesheet" href="indexStyle.css" />
   </head>
   <body>
     <div class="container">
@@ -41,22 +41,27 @@
               id="fileInput"
             />
             <label for="fileInput" class="file-label"
-              >Escolher arquivo CSV</label
+              >📁 Escolher arquivo CSV</label
             >
             <span class="file-name" id="fileName"
               >Nenhum arquivo selecionado</span
             >
           </div>
 
-          <button type="submit" class="submit-btn">Iniciar Análise</button>
+          <button type="submit" class="submit-btn">📊 Iniciar Análise</button>
         </form>
 
         <div class="info-section">
-          <h3 class="info-title">Informações importantes:</h3>
+          <h3 class="info-title">ℹ️ Informações importantes:</h3>
           <ul class="info-list">
-            <li class="info-item">O arquivo deve estar no formato CSV</li>
-            <li class="info-item">Tamanho máximo: 16MB</li>
-            <li class="info-item">O processo pode levar alguns minutos</li>
+            <li class="info-item">
+              ✔️ O arquivo deve estar no formato
+              <span style="font-weight: 600">.CSV</span>
+            </li>
+            <li class="info-item">
+              📦 Tamanho máximo: <span style="font-weight: 600">16MB</span>
+            </li>
+            <li class="info-item">⏱️ O processo pode levar alguns minutos</li>
           </ul>
         </div>
       </div>

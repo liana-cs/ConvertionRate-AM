@@ -1,0 +1,200 @@
+/* Reset básico */
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+body {
+  font-family: "Poppins", sans-serif;
+  background: linear-gradient(to right, #ebebeb, #e7e6e6);
+  color: #2c3e50;
+  line-height: 1.6;
+  min-height: 100vh;
+  padding: 2rem;
+}
+
+/* Layout geral */
+.page-wrapper {
+  max-width: 1200px;
+  margin: 0 auto;
+  display: flex;
+  flex-direction: column;
+  gap: 2rem;
+}
+
+/* Header */
+.header {
+  text-align: center;
+  padding-bottom: 1.5rem;
+}
+
+.title {
+  font-size: 2.6rem;
+  font-weight: 700;
+  color: #2c3e50;
+}
+
+.subtitle {
+  font-size: 1.1rem;
+  color: #7f8c8d;
+  margin-top: 0.4rem;
+  max-width: 90%;
+  margin-inline: auto;
+}
+
+/* Seção do formulário (em um card) */
+.upload-card {
+  background-color: #fff;
+  padding: 2rem;
+  border-radius: 18px;
+  box-shadow: 0 12px 35px rgba(0, 0, 0, 0.08);
+  transition: box-shadow 0.3s ease;
+}
+
+.upload-card:hover {
+  box-shadow: 0 16px 40px rgba(0, 0, 0, 0.1);
+}
+
+.upload-section {
+  margin-top: 1rem;
+}
+
+/* Alertas */
+.alert {
+  padding: 1rem;
+  border-radius: 8px;
+  margin-bottom: 1rem;
+  font-weight: 500;
+  background-color: #fffafa;
+  font-size: 0.95rem;
+  box-shadow: 0 2px 6px rgba(0, 0, 0, 0.05);
+}
+
+.alert-success {
+  background-color: #d4edda;
+  color: #155724;
+  border-left: 5px solid #28a745;
+}
+
+.alert-error {
+  background-color: #f8d7da;
+  color: #721c24;
+  border-left: 5px solid #dc3545;
+}
+
+/* Input de arquivo */
+.file-input-container {
+  display: flex;
+  flex-direction: column;
+  gap: 0.6rem;
+  margin-bottom: 1.5rem;
+  align-items: center;
+}
+
+.file-input {
+  display: none;
+}
+
+.file-label {
+  background-color: #3498db;
+  color: #fff;
+  padding: 0.6rem 1.3rem;
+  border-radius: 8px;
+  text-align: center;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  box-shadow: 0 4px 12px rgba(52, 152, 219, 0.2);
+  font-size: 1rem;
+  width: auto;
+  display: inline-block;
+}
+
+.file-label:hover {
+  background-color: #2980b9;
+  transform: translateY(-1px);
+}
+
+.file-name {
+  font-style: italic;
+  color: #555;
+  font-size: 0.95rem;
+  text-align: center;
+}
+
+/* Botão de envio */
+.submit-btn {
+  background-color: #26b863;
+  color: white;
+  margin-left: 43%;
+  padding: 0.6rem 1.3rem;
+  border: none;
+  border-radius: 8px;
+  cursor: pointer;
+  font-size: 1rem;
+  font-family: "poppins", sans-serif;
+  transition: all 0.3s ease;
+  box-shadow: 0 4px 12px rgba(46, 204, 113, 0.2);
+  width: auto;
+  align-self: center;
+}
+
+.submit-btn:hover {
+  background-color: #289254;
+  transform: translateY(-1px);
+}
+
+/* Seção de informações */
+.info-section {
+  background-color: #f9f9f9;
+  padding: 1rem 1.2rem;
+  border-left: 4px solid #2980b9;
+  border-radius: 12px;
+  margin-top: 2rem;
+}
+
+.info-title {
+  font-size: 1.2rem;
+  margin-bottom: 0.8rem;
+  color: #2c3e50;
+  font-weight: 600;
+}
+
+.info-list {
+  list-style: none;
+  padding-left: 0;
+}
+
+.info-item {
+  margin-bottom: 0.6rem;
+  color: #555;
+  font-size: 0.96rem;
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+}
+
+/* Responsivo */
+@media (max-width: 600px) {
+  body {
+    padding: 1rem;
+  }
+
+  .title {
+    font-size: 2rem;
+  }
+
+  .subtitle {
+    font-size: 1rem;
+  }
+
+  .file-label,
+  .submit-btn {
+    font-size: 0.95rem;
+    padding: 0.6rem 1rem;
+  }
+
+  .upload-card {
+    padding: 1.5rem 1rem;
+  }
+}
