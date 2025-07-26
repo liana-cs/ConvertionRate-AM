@@ -43,3 +43,12 @@ Abra o navegador em:
 http://localhost:5000
 ```
 Por fim, bastar subir um arquvio .csv para fazer o treinamento. Lá você pode acompanhar experimentos, métricas, parâmetros e artefatos salvos.
+
+---
+
+### Integrantes:
+
+- Arthur de Oliveira
+- Karen Ribeiro
+- Liana Carvalho
+- Maria Eduarda Azevedo
