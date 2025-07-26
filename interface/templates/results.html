@@ -1,90 +1,117 @@
 <!DOCTYPE html>
 <html lang="pt-BR">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Resultados - ML Model Trainer</title>
-    <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
-</head>
-<body>
+    <link
+      rel="stylesheet"
+      href="{{ url_for('static', filename='style.css') }}"
+    />
+  </head>
+  <body>
     <div class="container">
-        <header>
-            <h1>Resultados da Análise</h1>
-            <p>Arquivo analisado: <strong>{{ filename }}</strong></p>
-        </header>
+      <header class="header">
+        <h1 class="title">Resultados da Análise</h1>
+        <p class="subtitle">
+          Arquivo analisado: <strong class="filename">{{ filename }}</strong>
+        </p>
+      </header>
 
-        <div class="results-section">
-            <div class="best-model-card">
-                <h2>Melhor Modelo</h2>
-                <div class="model-info">
-                    <h3>{{ results.best_model.model_name }}</h3>
-                    <div class="metrics">
-                        <div class="metric">
-                            <span class="metric-label">RMSE:</span>
-                            <span class="metric-value">{{ "%.4f"|format(results.best_model.rmse) }}</span>
-                        </div>
-                        <div class="metric">
-                            <span class="metric-label">MAE:</span>
-                            <span class="metric-value">{{ "%.4f"|format(results.best_model.mae) }}</span>
-                        </div>
-                        <div class="metric">
-                            <span class="metric-label">R²:</span>
-                            <span class="metric-value">{{ "%.4f"|format(results.best_model.r2) }}</span>
-                        </div>
-                    </div>
-                </div>
+      <div class="results-section">
+        <div class="best-model-card">
+          <h2 class="section-title">Melhor Modelo</h2>
+          <div class="model-info">
+            <h3 class="model-name">{{ results.best_model.model_name }}</h3>
+            <div class="metrics">
+              <div class="metric">
+                <span class="metric-label">RMSE:</span>
+                <span class="metric-value"
+                  >{{ "%.4f"|format(results.best_model.rmse) }}</span
+                >
+              </div>
+              <div class="metric">
+                <span class="metric-label">MAE:</span>
+                <span class="metric-value"
+                  >{{ "%.4f"|format(results.best_model.mae) }}</span
+                >
+              </div>
+              <div class="metric">
+                <span class="metric-label">R²:</span>
+                <span class="metric-value"
+                  >{{ "%.4f"|format(results.best_model.r2) }}</span
+                >
+              </div>
             </div>
-
-            <div class="all-models-section">
-                <h2>Comparação de Todos os Modelos</h2>
-                <div class="models-grid">
-                    {% for model in results.all_models %}
-                    <div class="model-card {% if model.model_name == results.best_model.model_name %}best{% endif %}">
-                        <h3>{{ model.model_name }}</h3>
-                        <div class="metrics">
-                            <div class="metric-small">
-                                <span>RMSE:</span>
-                                <span>{{ "%.4f"|format(model.rmse) }}</span>
-                            </div>
-                            <div class="metric-small">
-                                <span>MAE:</span>
-                                <span>{{ "%.4f"|format(model.mae) }}</span>
-                            </div>
-                            <div class="metric-small">
-                                <span>R²:</span>
-                                <span>{{ "%.4f"|format(model.r2) }}</span>
-                            </div>
-                        </div>
-                        {% if model.model_name == results.best_model.model_name %}
-                        <div class="best-badge">Melhor</div>
-                        {% endif %}
-                    </div>
-                    {% endfor %}
-                </div>
-            </div>
-
-            <div class="data-info-section">
-                <h2>📋 Informações do Dataset</h2>
-                <div class="data-info">
-                    <div class="info-item">
-                        <span>Features numéricas:</span>
-                        <span>{{ results.preprocessing_info.numerical_cols|length }}</span>
-                    </div>
-                    <div class="info-item">
-                        <span>Features categóricas:</span>
-                        <span>{{ results.preprocessing_info.categorical_cols|length }}</span>
-                    </div>
-                    <div class="info-item">
-                        <span>Total de features processadas:</span>
-                        <span>{{ results.preprocessing_info.total_features_processed }}</span>
-                    </div>
-                </div>
-            </div>
-
-            <div class="actions">
-                <a href="{{ url_for('index') }}" class="btn btn-primary">Nova Análise</a>
-            </div>
+          </div>
         </div>
+
+        <div class="all-models-section">
+          <h2 class="section-title">Comparação de Todos os Modelos</h2>
+          <div class="models-grid">
+            {% for model in results.all_models %}
+            <div
+              class="model-card {% if model.model_name == results.best_model.model_name %}best{% endif %}"
+            >
+              <h3 class="model-name">{{ model.model_name }}</h3>
+              <div class="metrics">
+                <div class="metric-small">
+                  <span class="metric-label">RMSE:</span>
+                  <span class="metric-value"
+                    >{{ "%.4f"|format(model.rmse) }}</span
+                  >
+                </div>
+                <div class="metric-small">
+                  <span class="metric-label">MAE:</span>
+                  <span class="metric-value"
+                    >{{ "%.4f"|format(model.mae) }}</span
+                  >
+                </div>
+                <div class="metric-small">
+                  <span class="metric-label">R²:</span>
+                  <span class="metric-value"
+                    >{{ "%.4f"|format(model.r2) }}</span
+                  >
+                </div>
+              </div>
+              {% if model.model_name == results.best_model.model_name %}
+              <div class="best-badge">Melhor</div>
+              {% endif %}
+            </div>
+            {% endfor %}
+          </div>
+        </div>
+
+        <div class="data-info-section">
+          <h2 class="section-title">📋 Informações do Dataset</h2>
+          <div class="data-info">
+            <div class="info-item">
+              <span class="info-label">Features numéricas:</span>
+              <span class="info-value"
+                >{{ results.preprocessing_info.numerical_cols|length }}</span
+              >
+            </div>
+            <div class="info-item">
+              <span class="info-label">Features categóricas:</span>
+              <span class="info-value"
+                >{{ results.preprocessing_info.categorical_cols|length }}</span
+              >
+            </div>
+            <div class="info-item">
+              <span class="info-label">Total de features processadas:</span>
+              <span class="info-value"
+                >{{ results.preprocessing_info.total_features_processed }}</span
+              >
+            </div>
+          </div>
+        </div>
+
+        <div class="actions">
+          <a href="{{ url_for('index') }}" class="btn btn-primary"
+            >Nova Análise</a
+          >
+        </div>
+      </div>
     </div>
-</body>
+  </body>
 </html>

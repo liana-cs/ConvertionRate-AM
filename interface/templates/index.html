@@ -1,57 +1,76 @@
 <!DOCTYPE html>
 <html lang="pt-BR">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>ML Model Trainer</title>
-    <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
-</head>
-<body>
+    <link
+      rel="stylesheet"
+      href="{{ url_for('static', filename='styles.css') }}"
+    />
+    <link rel="stylesheet" href="style.css" />
+  </head>
+  <body>
     <div class="container">
-        <header>
-            <h1> ML Model Trainer</h1>
-            <p>Envie seu dataset CSV e descubra o melhor modelo para seus dados</p>
-        </header>
+      <header class="header">
+        <h1 class="title">ML Model Trainer</h1>
+        <p class="subtitle">
+          Envie seu dataset CSV e descubra o melhor modelo para seus dados
+        </p>
+      </header>
 
-        <div class="upload-section">
-            {% with messages = get_flashed_messages(with_categories=true) %}
-                {% if messages %}
-                    {% for category, message in messages %}
-                        <div class="alert alert-{{ category }}">{{ message }}</div>
-                    {% endfor %}
-                {% endif %}
-            {% endwith %}
+      <div class="upload-section">
+        {% with messages = get_flashed_messages(with_categories=true) %} {% if
+        messages %} {% for category, message in messages %}
+        <div class="alert alert-{{ category }}">{{ message }}</div>
+        {% endfor %} {% endif %} {% endwith %}
 
-            <form method="POST" action="{{ url_for('upload_file') }}" enctype="multipart/form-data" class="upload-form">
-                <div class="file-input-container">
-                    <input type="file" name="file" accept=".csv" required class="file-input" id="fileInput">
-                    <label for="fileInput" class="file-label">
-                         Escolher arquivo CSV
-                    </label>
-                    <span class="file-name" id="fileName">Nenhum arquivo selecionado</span>
-                </div>
-                
-                <button type="submit" class="submit-btn">
-                    Iniciar Análise
-                </button>
-            </form>
+        <form
+          method="POST"
+          action="{{ url_for('upload_file') }}"
+          enctype="multipart/form-data"
+          class="upload-form"
+        >
+          <div class="file-input-container">
+            <input
+              type="file"
+              name="file"
+              accept=".csv"
+              required
+              class="file-input"
+              id="fileInput"
+            />
+            <label for="fileInput" class="file-label"
+              >Escolher arquivo CSV</label
+            >
+            <span class="file-name" id="fileName"
+              >Nenhum arquivo selecionado</span
+            >
+          </div>
 
-            <div class="info-section">
-                <h3>Informações importantes:</h3>
-                <ul>
-                    <li>O arquivo deve estar no formato CSV</li>
-                    <li>Tamanho máximo: 16MB</li>
-                    <li>O processo pode levar alguns minutos</li>
-                </ul>
-            </div>
+          <button type="submit" class="submit-btn">Iniciar Análise</button>
+        </form>
+
+        <div class="info-section">
+          <h3 class="info-title">Informações importantes:</h3>
+          <ul class="info-list">
+            <li class="info-item">O arquivo deve estar no formato CSV</li>
+            <li class="info-item">Tamanho máximo: 16MB</li>
+            <li class="info-item">O processo pode levar alguns minutos</li>
+          </ul>
         </div>
+      </div>
     </div>
 
     <script>
-        document.getElementById('fileInput').addEventListener('change', function(e) {
-            const fileName = e.target.files[0] ? e.target.files[0].name : 'Nenhum arquivo selecionado';
-            document.getElementById('fileName').textContent = fileName;
+      document
+        .getElementById("fileInput")
+        .addEventListener("change", function (e) {
+          const fileName = e.target.files[0]
+            ? e.target.files[0].name
+            : "Nenhum arquivo selecionado";
+          document.getElementById("fileName").textContent = fileName;
         });
     </script>
-</body>
+  </body>
 </html>
